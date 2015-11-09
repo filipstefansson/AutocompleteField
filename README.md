@@ -28,6 +28,8 @@ The easiest way is to add a `UITextField` in your Storyboard, and then giving it
 If you want to add a field using code, there's a custom init method you can use:
 
 ```swift
+import AutocompleteField
+
 let textField = AutocompleteField(frame: CGRectMake(10, 10, 200, 40), suggestions: ["Abraham", "George", "Franklin"])
 view.addSubview(textField)
 ```
