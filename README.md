@@ -16,7 +16,10 @@ Import `AutocompleteField.swift` into your project.
 
 ### CocoaPods
 
-Coming soon.
+```
+platform :ios, '8.0'
+pod "AutocompleteField", "~> 1.0" 
+```
 
 ## Usage
 
@@ -24,7 +27,7 @@ The easiest way is to add a `UITextField` in your Storyboard, and then giving it
 
 If you want to add a field using code, there's a custom init method you can use:
 
-```
+```swift
 let textField = AutocompleteField(frame: CGRectMake(10, 10, 200, 40), suggestions: ["Abraham", "George", "Franklin"])
 view.addSubview(textField)
 ```
@@ -33,7 +36,7 @@ view.addSubview(textField)
 
 AutocompleteField is a subclass of UITextField, so you can modify it in the same way you normally would, without any restrictions. The new properties you can set are:
 
-```
+```swift
 // left/right padding
 padding: CGFloat 
 // the color of the suggestion. Matches the default placeholder color
