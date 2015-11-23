@@ -39,7 +39,7 @@ view.addSubview(textField)
 AutocompleteField is a subclass of UITextField, so you can modify it in the same way you normally would, without any restrictions. The new properties you can set are:
 
 Property  | Type | Description
-------------- | -------------
+--------- | ---- | -----------
 `padding`  | `CGFloat` | Left/right padding.
 `completionColor`  | `UIColor` | The color of the suggestion. Defaults to the default placeholder color.
 `suggestion`  | `String` | The current suggestion shown. Can be used to force a suggestion.
