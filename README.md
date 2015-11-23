@@ -18,7 +18,7 @@ Import `AutocompleteField.swift` into your project.
 
 ```
 platform :ios, '8.0'
-pod "AutocompleteField", "~> 1.0" 
+pod "AutocompleteField", "~> 1.1" 
 ```
 
 ## Usage
