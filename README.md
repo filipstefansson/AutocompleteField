@@ -38,25 +38,21 @@ view.addSubview(textField)
 
 AutocompleteField is a subclass of UITextField, so you can modify it in the same way you normally would, without any restrictions. The new properties you can set are:
 
-```swift
-// left/right padding
-padding: CGFloat 
-// the color of the suggestion. Matches the default placeholder color
-completionColor : UIColor 
-// The current suggestion shown. Can also be used to force a suggestion
-suggestion : String
-// Array of suggestions
-suggestions : [String]
-// Move the suggestion label up or down. Sometimes there's a small difference, and this can be used to fix it.
-pixelCorrection : CGFloat
-```
+Property  | Type | Description
+------------- | -------------
+`padding`  | `CGFloat` | Left/right padding.
+`completionColor`  | `UIColor` | The color of the suggestion. Defaults to the default placeholder color.
+`suggestion`  | `String` | The current suggestion shown. Can be used to force a suggestion.
+`suggestions`  | `[String]` | Array of suggestions.
+`autocompleteType`  | `AutocompleteType` | The type of autocomplete that should be used. .Word will only hint the the next word in the suggestion and .Sentence will show all words.
+`pixelCorrection`  | `CGFloat` | Move the suggestion label up or down. Sometimes there's a small difference, and this can be used to fix it.
 
 ## Demo
 
 Check out the Example project.
 
 ## Todo
-- [ ] Smarter suggestions. If both John Doe and John Smith are in the suggestion array, only Joe should be suggested.
+- [x] Smarter suggestions. If both John Doe and John Smith are in the suggestion array, only Joe should be suggested.
 - [ ] Tests
 
 ## License

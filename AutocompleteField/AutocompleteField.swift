@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 
 
+public enum AutocompleteType {
+    case Word
+    case Sentence
+}
+
+
 @IBDesignable public class AutocompleteField: UITextField
 {
     // MARK: - public properties
@@ -43,6 +49,9 @@ import UIKit
             }
         }
     }
+    
+    // The type of autocomplete that should be used
+    public var autocompleteType : AutocompleteType = .Word
     
     
     // MARK: - private properties
@@ -141,12 +150,25 @@ import UIKit
         Set content of the suggestion label.
         - parameter text: Suggestion text
     */
-    private func setLabelContent(text : String = "")
+    private func setLabelContent(var text : String = "")
     {
         // label string
         if(text.characters.count < 1) {
             label.attributedText = nil
             return
+        }
+        
+        // only return first word if in word mode
+        if(self.autocompleteType == .Word)
+        {
+            let words = self.text!.componentsSeparatedByString(" ")
+            let suggestionWords = text.componentsSeparatedByString(" ")
+            var string : String = ""
+            for(var i = 0; i < words.count; i++)
+            {
+                string = string.stringByAppendingString(suggestionWords[i]) + " "
+            }
+            text = string
         }
         
         // create an attributed string instead of the regular one. 

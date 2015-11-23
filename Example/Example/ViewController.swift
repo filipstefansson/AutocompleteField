@@ -28,7 +28,7 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         emailField.delegate  = self
         
         // autocomplete suggestions
-        let suggestions = ["Abraham", "Abraham Lincoln"]
+        let suggestions = ["Abraham Lincoln", "John Doe", "John Smith"]
         basicField.suggestions = suggestions
         customField.suggestions = suggestions
         
