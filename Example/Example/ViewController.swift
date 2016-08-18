@@ -35,7 +35,7 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         // change event for email field
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "emailChanged:",
+            selector: #selector(ViewController.emailChanged(_:)),
             name: UITextFieldTextDidChangeNotification,
             object: emailField)
         
@@ -70,7 +70,7 @@ class ViewController: UITableViewController, UITextFieldDelegate {
                 if let range = result?.range
                 {
                     // If user has started writing the suffix, only suggest what's left of it
-                    let regSuffix = text.substringWithRange(Range<String.Index>(start: text.startIndex.advancedBy(range.length - 1), end: text.endIndex))
+                    let regSuffix = text.substringWithRange(Range<String.Index>(text.startIndex.advancedBy(range.length - 1) ..< text.endIndex))
                     suffix = suffix.stringByReplacingOccurrencesOfString(regSuffix, withString: "")
                 }
                 
