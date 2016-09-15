@@ -33,15 +33,15 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         customField.suggestions = suggestions
         
         // change event for email field
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
-            selector: "emailChanged:",
-            name: UITextFieldTextDidChangeNotification,
+            selector: #selector(emailChanged(notification:)),
+            name: NSNotification.Name.UITextFieldTextDidChange,
             object: emailField)
         
         
         // add code example
-        let textField = AutocompleteField(frame: CGRectMake(0, 0, self.codeView.frame.size.width, self.codeView.frame.size.height), suggestions: ["abraham"])
+        let textField = AutocompleteField(frame: CGRect(x: 0, y: 0, width: self.codeView.frame.size.width, height: self.codeView.frame.size.height), suggestions: ["abraham"])
         
         textField.padding = 8
         textField.placeholder = "Try typing 'A'"
@@ -49,11 +49,11 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         self.codeView.addSubview(textField)
         
         // auto layout
-        let vertivalConstraint = textField.centerYAnchor.constraintEqualToAnchor(self.codeView.centerYAnchor)
-        let leadingConstraint = textField.leadingAnchor.constraintEqualToAnchor(self.codeView.leadingAnchor, constant: 10)
-        let trailingConstraint = textField.trailingAnchor.constraintEqualToAnchor(self.codeView.trailingAnchor, constant: -10)
-        let heightConstraint = textField.heightAnchor.constraintEqualToAnchor(nil, constant: 37)
-        NSLayoutConstraint.activateConstraints([leadingConstraint, vertivalConstraint, trailingConstraint, heightConstraint])
+        let vertivalConstraint = textField.centerYAnchor.constraint(equalTo: self.codeView.centerYAnchor)
+        let leadingConstraint = textField.leadingAnchor.constraint(equalTo: self.codeView.leadingAnchor, constant: 10)
+        let trailingConstraint = textField.trailingAnchor.constraint(equalTo: self.codeView.trailingAnchor, constant: -10)
+        let heightConstraint = textField.heightAnchor.constraint(equalTo: self.codeView.heightAnchor, constant: 37)
+        NSLayoutConstraint.activate([leadingConstraint, vertivalConstraint, trailingConstraint, heightConstraint])
     }
     
     func emailChanged(notification: NSNotification)
@@ -64,14 +64,15 @@ class ViewController: UITableViewController, UITextFieldDelegate {
             {
                 // Check if the user has started writing the suffix yet.
                 var suffix = "@gmail.com"
-                let regex = try! NSRegularExpression(pattern: "^[A-Z0-9._%+-]+@",options: [.CaseInsensitive])
-                let result = regex.firstMatchInString(text, options:[], range: NSMakeRange(0, text.characters.count))
+                let regex = try! NSRegularExpression(pattern: "^[A-Z0-9._%+-]+@",options: [.caseInsensitive])
+                let result = regex.firstMatch(in: text, options:[], range: NSMakeRange(0, text.characters.count))
                 
                 if let range = result?.range
                 {
                     // If user has started writing the suffix, only suggest what's left of it
-                    let regSuffix = text.substringWithRange(Range<String.Index>(start: text.startIndex.advancedBy(range.length - 1), end: text.endIndex))
-                    suffix = suffix.stringByReplacingOccurrencesOfString(regSuffix, withString: "")
+                    let range = Range<String.Index>(text.index(text.startIndex, offsetBy: range.length - 1)..<text.endIndex)
+                    let regSuffix = text.substring(with: range)
+                    suffix = suffix.replacingOccurrences(of: regSuffix, with: "")
                 }
                 
                 self.emailField.suggestion = text + suffix
@@ -86,7 +87,7 @@ class ViewController: UITableViewController, UITextFieldDelegate {
     }
     
     // MARK: - UITextField delegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         // set field text to the suggestion text on return
         if let field = textField as? AutocompleteField
