@@ -1,59 +1,73 @@
-![AutocompleteField](https://dl.dropboxusercontent.com/u/958499/autocomplete.png?dl=0)
+# AutocompleteField
 
-AutocompleteField let's you add word completion to your UITextFields. 
+Subclass of `UITextField` that shows inline suggestions while typing.
 
-> Autocomplete, or word completion, is a feature in which an application predicts the rest of a word a user is typing.
+![AutocompleteField](/.github/example.gif?raw=true)
 
-## How it works
+# Requirements
 
-![AutocompleteField](https://dl.dropboxusercontent.com/u/958499/preview.gif?dl=0)
+- iOS 10.0+
+- Swift 4.2+
 
-## Installation
+# Installation
 
-### Manual installation
+## CocoaPods
 
-Import `AutocompleteField.swift` into your project.
-
-### CocoaPods
-
-```
-platform :ios, '8.0'
-pod "AutocompleteField", "~> 1.1" 
+```ruby
+target 'MyApp' do
+  pod 'AutocompleteField', '~> 2.0'
+end
 ```
 
-## Usage
+## Swift Package Manager
 
-The easiest way is to add a `UITextField` in your Storyboard, and then giving it the `AutocompleteField` subclass. You can use the property editor to change both the padding and the completion color of the textfield.
+Select File > Swift Packages > Add Package Dependency and then enter https://github.com/filipstefansson/AutocompleteField.git in the "Choose Package Repository" dialog.
 
-If you want to add a field using code, there's a custom init method you can use:
+See [Apple docs](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) for more information.
+
+## Manually
+
+Copy `/Sources/AutocompleteField.swift` to your project. There are no other dependencies.
+
+# Usage
+
+You use this textfield in the same way as the regular `UITextField`, through Storyboards or programmatically:
 
 ```swift
-import AutocompleteField
+let textfield = AutocompleteField(frame: CGRect(x: 20, y: 20, width: 200, height: 40))
+textfield.placeholder = "Start typing George..."
 
-let textField = AutocompleteField(frame: CGRectMake(10, 10, 200, 40), suggestions: ["Abraham", "George", "Franklin"])
-view.addSubview(textField)
+// add suggestions to textfield
+textfield.suggestions = [
+  "George Washington",
+  "Thomas Jefferson",
+  "John Adams",
+  "Theodore Roosevelt",
+  "John F. Kennedy",
+  "George W. Bush",
+]
+
+// add to view
+self.view.addSubview(textfield)
 ```
 
-## Customization
+> [See full example here](/examples/BasicExample/BasicExample/ViewController.swift).
 
-AutocompleteField is a subclass of UITextField, so you can modify it in the same way you normally would, without any restrictions. The new properties you can set are:
+# API
 
-Property  | Type | Description
---------- | ---- | -----------
-`padding`  | `CGFloat` | Left/right padding.
-`completionColor`  | `UIColor` | The color of the suggestion. Defaults to the default placeholder color.
-`suggestion`  | `String` | The current suggestion shown. Can be used to force a suggestion.
-`suggestions`  | `[String]` | Array of suggestions.
-`autocompleteType`  | `AutocompleteType` | The type of autocomplete that should be used. .Word will only hint the the next word in the suggestion and .Sentence will show all words.
-`pixelCorrection`  | `CGFloat` | Move the suggestion label up or down. Sometimes there's a small difference, and this can be used to fix it.
+| Property            | Type               | Description                                                                                                                                        |
+| ------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `suggestionColor`   | `UIColor`          | The color of the suggestion. Defaults to the default placeholder color.                                                                            |
+| `suggestion`        | `String`           | The current suggestion shown. Setting this manually will force a suggestion to be shown.                                                           |
+| `suggestions`       | `[String]`         | Array of suggestions.                                                                                                                              |
+| `autocompleteType`  | `AutocompleteType` | The type of autocomplete that should be used. `.Word` will only hint the the next word in the suggestion and `.Sentence` will show all words.      |
+| `pixelCorrections`  | `CGPoint`          | Move the suggestion label up/down left/right. Use this to correct any differences if the suggestion doesn't match the input value for some reason. |
+| `horizontalPadding` | `CGFloat`          | Add padding to your textfield. Automatically set when using a `borderStyle` that has padding.                                                      |
 
-## Demo
+# Demo
 
-Check out the Example project.
+Check out the [example project](/examples/BasicExample).
 
-## Todo
-- [x] Smarter suggestions. If both John Doe and John Smith are in the suggestion array, only Joe should be suggested.
-- [ ] Tests
+# License
 
-## License
-AutocompleteField is provided under the [MIT License](http://http//opensource.org/licenses/mit-license.php). See LICENSE for details.
+`AutocompleteField` is provided under the [MIT License](http://http//opensource.org/licenses/mit-license.php). See LICENSE for details.
