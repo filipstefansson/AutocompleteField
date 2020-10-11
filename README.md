@@ -52,11 +52,11 @@ import AutocompleteField
 
 ...
 
-let textfield = AutocompleteField(frame: CGRect(x: 20, y: 20, width: 200, height: 40))
-textfield.placeholder = "Start typing George..."
+// basic textfield autocompleting names
+let nameField = AutocompleteField(frame: CGRect(x: 20, y: 20, width: 200, height: 40))
+nameField.placeholder = "Name"
 
-// add suggestions to textfield
-textfield.suggestions = [
+nameField.suggestions = [
   "George Washington",
   "Thomas Jefferson",
   "John Adams",
@@ -65,22 +65,39 @@ textfield.suggestions = [
   "George W. Bush",
 ]
 
-// add to view
-self.view.addSubview(textfield)
+self.view.addSubview(nameField)
+
+
+// email textfield autocompleting email providers
+let emailField = AutocompleteField(frame: CGRect(x: 20, y: 70, width: 200, height: 40))
+emailField.placeholder = "Email"
+emailField.keyboardType = .emailAddress
+
+emailField.suggestions = [
+  "gmail.com",
+  "icloud.com",
+  "outlook.com",
+]
+
+// add a delimiter
+emailField.delimiter = "@"
+
+self.view.addSubview(emailField)
 ```
 
-👉 [See full example here](/examples/BasicExample/BasicExample/ViewController.swift)
+> [See full example here](/examples/BasicExample/BasicExample/ViewController.swift)
 
 # API
 
-| Property            | Type             | Description                                                                                                                                                                    |
-| ------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `suggestionColor`   | `UIColor`        | The color of the suggestion. Defaults to the default placeholder color.                                                                                                        |
-| `suggestion`        | `String`         | The current suggestion shown. Read only.                                                                                                                                       |
-| `suggestions`       | `[String]`       | Array of suggestions.                                                                                                                                                          |
-| `suggestionType`    | `SuggestionType` | The type of suggestion that should be used. `.Word` will only hint the the next word in the suggestion and `.Sentence` will show the whole suggestion. Defaults to `.Sentence` |
-| `pixelCorrections`  | `CGPoint`        | Move the suggestion label up/down left/right. Use this to correct any differences if the suggestion doesn't match the input value for some reason.                             |
-| `horizontalPadding` | `CGFloat`        | Add padding to your textfield. Automatically set when using a `borderStyle` that has padding.                                                                                  |
+| Property            | Type             | Description                                                                                                                                                                     |
+| ------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `suggestionColor`   | `UIColor`        | The color of the suggestion. Defaults to the default placeholder color.                                                                                                         |
+| `suggestion`        | `String`         | The current suggestion shown. Read only.                                                                                                                                        |
+| `suggestions`       | `[String]`       | Array of suggestions.                                                                                                                                                           |
+| `suggestionType`    | `SuggestionType` | The type of suggestion that should be used. `.Word` will only hint the the next word in the suggestion and `.Sentence` will show the whole suggestion. Defaults to `.Sentence`. |
+| `pixelCorrections`  | `CGPoint`        | Move the suggestion label up/down left/right. Use this to correct any differences if the suggestion doesn't match the input value for some reason.                              |
+| `horizontalPadding` | `CGFloat`        | Add padding to your textfield. Automatically set when using a `borderStyle` that has padding.                                                                                   |
+| `delimiter`         | `String`         | Add a delimiter to only show a suggestion if there's more than one occurance of the delimiter. Perfect for autocompleting email providers.                                      |
 
 # Demo
 
