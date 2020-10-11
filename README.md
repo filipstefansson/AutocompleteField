@@ -1,6 +1,11 @@
 # AutocompleteField
 
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/AutocompleteField.svg)](https://img.shields.io/cocoapods/v/AutocompleteField.svg)
+[![Platform](https://img.shields.io/cocoapods/p/AutocompleteField.svg?style=flat)](https://AutocompleteField.github.io/AutocompleteField)
+
 Subclass of `UITextField` that shows inline suggestions while typing.
+
+---
 
 ![AutocompleteField](/.github/example.gif?raw=true)
 
@@ -13,6 +18,8 @@ Subclass of `UITextField` that shows inline suggestions while typing.
 
 ## CocoaPods
 
+Add the following to your `Podfile`:
+
 ```ruby
 target 'MyApp' do
   pod 'AutocompleteField', '~> 2.0'
@@ -21,19 +28,24 @@ end
 
 ## Swift Package Manager
 
-Select File > Swift Packages > Add Package Dependency and then enter https://github.com/filipstefansson/AutocompleteField.git in the "Choose Package Repository" dialog.
+- Select **File > Swift Packages > Add Package Dependency**.
+- Enter `https://github.com/filipstefansson/AutocompleteField.git` in the **Choose Package Repository** dialog.
 
 See [Apple docs](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) for more information.
 
 ## Manually
 
-Copy `/Sources/AutocompleteField.swift` to your project. There are no other dependencies.
+- Copy `/Sources/AutocompleteField.swift` to your project. There are no other dependencies.
 
 # Usage
 
 You use this textfield in the same way as the regular `UITextField`, through Storyboards or programmatically:
 
 ```swift
+import AutocompleteField
+
+...
+
 let textfield = AutocompleteField(frame: CGRect(x: 20, y: 20, width: 200, height: 40))
 textfield.placeholder = "Start typing George..."
 
@@ -51,7 +63,7 @@ textfield.suggestions = [
 self.view.addSubview(textfield)
 ```
 
-> [See full example here](/examples/BasicExample/BasicExample/ViewController.swift).
+👉 [See full example here](/examples/BasicExample/BasicExample/ViewController.swift).
 
 # API
 
