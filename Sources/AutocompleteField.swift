@@ -26,15 +26,8 @@ public enum SuggestionType {
     /// The color of the autocompletion suggestion.
     @IBInspectable public var suggestionColor: UIColor = UIColor(white: 0, alpha: 0.22)
 
-    /// The current suggestion shown. You can use this as a getter you to retrive
-    /// the current suggestion or as a setter to force the textfield to show a specific suggestion.
-    public var suggestion: String? {
-        didSet {
-            if let val = suggestion {
-                self.setLabelText(text: val)
-            }
-        }
-    }
+    /// The current suggestion shown. Read only.
+    public private(set) var suggestion: String?
 
     /// Move the suggestion label in x or y. Sometimes there's a small difference between
     /// the suggestion and the real text, and this can be used to fix it.
