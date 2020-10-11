@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
   s.author = { "Filip Stefansson" => "filip.stefansson@gmail.com" }
   s.platform = :ios
   s.ios.deployment_target = "10.0"
-  s.source = { :git => "https://github.com/filipstefansson/AutocompleteField.git", :tag => "v2.0" }
+  s.source = { :git => "https://github.com/filipstefansson/AutocompleteField.git", :tag => "2.0" }
   s.source_files = "Sources/**/*.swift"
 end
