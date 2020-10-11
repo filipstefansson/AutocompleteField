@@ -5,6 +5,12 @@
 
 Subclass of `UITextField` that shows inline suggestions while typing.
 
+- Plug and play replacement for `UITextField`.
+- Delimiter support. Perfect when autocompleting email addresses.
+- Two suggestion modes (word and sentence, see API below).
+- Works with custom fonts, borders etc.
+- Super lightweight and zero dependencies.
+
 ---
 
 ![AutocompleteField](/.github/example.gif?raw=true)

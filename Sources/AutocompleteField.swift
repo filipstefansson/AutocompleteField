@@ -45,6 +45,9 @@ public enum SuggestionType {
 
     /// Set a horizontal padding for the the textfield. Automatically set when using a `borderStyle` of `.roundedRect`, `.bezel` or `.line`, because those have added padding.
     public var horizontalPadding: CGFloat = 0
+    
+    /// Set a delimiter to only show suggestions after the first occurance of that character
+    public var delimiter: String?
 
     // whenever the text value is set, we need to update the suggestion
     // we do this by overriding the `text` property setter.
@@ -144,7 +147,7 @@ public enum SuggestionType {
             label.attributedText = nil
             return
         }
-        
+
         // don't show the suggestion if
         // 1. there's no text
         // 2. the text is longer than the suggestion
@@ -209,6 +212,19 @@ public enum SuggestionType {
 
         return wordSuggestions
     }
+    
+    /// Splits text by a delimiter and returns an array with a max of two items containing everything
+    /// before and after the first occurance of the delimiter
+    /// test@em@il.com becomes ["test", "em@ail.com"]
+    private func splitTextByDelimiter(text: String, delimiter: String) -> [String] {
+        var parts = text.components(separatedBy: delimiter)
+        let firstPart = parts[0]
+        if (parts.count > 1) {
+            parts.removeFirst()
+            return [firstPart, parts.joined(separator: delimiter)]
+        }
+        return [firstPart]
+    }
 
     /// Scans through the suggestions array and finds a suggestion that matches the searchTerm.
     ///
@@ -217,15 +233,26 @@ public enum SuggestionType {
     /// - returns A string or nil
     private func getSuggestion(text: String?) -> String?
     {
-        guard let suggestionText = text else {
+        guard var inputText = text else {
+            return nil;
+        }
+        
+        // if delimiter is set
+        if let delimiterText = self.delimiter {
+            // check if delimiter has been used
+            let parts = self.splitTextByDelimiter(text: inputText, delimiter: delimiterText)
+            if (parts.count > 1) {
+                inputText = parts[1]
+            } else {
+                return nil
+            }
+        }
+        
+        if (inputText == "") {
             return nil;
         }
 
-        if (text == "") {
-            return nil;
-        }
-
-        if let suggestion = self.suggestionList.first(where: { $0.hasPrefix(suggestionText) }) {
+        if let suggestion = self.suggestionList.first(where: { $0.hasPrefix(inputText) }) {
             return suggestion
         }
 
@@ -239,7 +266,20 @@ public enum SuggestionType {
     /// - parameters:
     ///     - notification: The NSNotifcation attached to the event
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if let suggestion = getSuggestion(text: text) {
+        guard let text = self.text else {
+            return
+        }
+        
+        if var suggestion = getSuggestion(text: text) {
+            // extra logic if we have a delimiter
+            if let delimter = self.delimiter {
+                // grab first part of text
+                let prefix = self.splitTextByDelimiter(text: text, delimiter: delimter)[0]
+                // add everything before the delimiter to the suggestion so it
+                // works with our setLabelText method
+                suggestion = prefix.appending(delimter).appending(suggestion)
+            }
+            
             self.suggestion = suggestion
             self.setLabelText(text: suggestion)
         } else {
