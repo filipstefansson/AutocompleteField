@@ -3,6 +3,7 @@ import XCTest
 final class AutocompleteFieldTests: XCTestCase {
     func testWordSuggestions() {
         let textfield = AutocompleteField()
+        textfield.suggestionType = .Word
         textfield.suggestions = [
             "George Washington",
             "Thomas Jefferson",
@@ -36,7 +37,6 @@ final class AutocompleteFieldTests: XCTestCase {
     
     func testSetenceSuggestions() {
         let textfield = AutocompleteField()
-        textfield.autocompleteType = .Sentence
         textfield.suggestions = [
             "George Washington",
             "Thomas Jefferson",

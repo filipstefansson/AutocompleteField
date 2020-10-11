@@ -63,18 +63,18 @@ textfield.suggestions = [
 self.view.addSubview(textfield)
 ```
 
-👉 [See full example here](/examples/BasicExample/BasicExample/ViewController.swift).
+👉 [See full example here](/examples/BasicExample/BasicExample/ViewController.swift)
 
 # API
 
-| Property            | Type               | Description                                                                                                                                        |
-| ------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `suggestionColor`   | `UIColor`          | The color of the suggestion. Defaults to the default placeholder color.                                                                            |
-| `suggestion`        | `String`           | The current suggestion shown. Setting this manually will force a suggestion to be shown.                                                           |
-| `suggestions`       | `[String]`         | Array of suggestions.                                                                                                                              |
-| `autocompleteType`  | `AutocompleteType` | The type of autocomplete that should be used. `.Word` will only hint the the next word in the suggestion and `.Sentence` will show all words.      |
-| `pixelCorrections`  | `CGPoint`          | Move the suggestion label up/down left/right. Use this to correct any differences if the suggestion doesn't match the input value for some reason. |
-| `horizontalPadding` | `CGFloat`          | Add padding to your textfield. Automatically set when using a `borderStyle` that has padding.                                                      |
+| Property            | Type             | Description                                                                                                                                                                    |
+| ------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `suggestionColor`   | `UIColor`        | The color of the suggestion. Defaults to the default placeholder color.                                                                                                        |
+| `suggestion`        | `String`         | The current suggestion shown. Setting this manually will force a suggestion to be shown.                                                                                       |
+| `suggestions`       | `[String]`       | Array of suggestions.                                                                                                                                                          |
+| `suggestionType`    | `SuggestionType` | The type of suggestion that should be used. `.Word` will only hint the the next word in the suggestion and `.Sentence` will show the whole suggestion. Defaults to `.Sentence` |
+| `pixelCorrections`  | `CGPoint`        | Move the suggestion label up/down left/right. Use this to correct any differences if the suggestion doesn't match the input value for some reason.                             |
+| `horizontalPadding` | `CGFloat`        | Add padding to your textfield. Automatically set when using a `borderStyle` that has padding.                                                                                  |
 
 # Demo
 

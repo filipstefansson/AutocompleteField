@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-public enum AutocompleteType {
+public enum SuggestionType {
     case Word
     case Sentence
 }
@@ -41,7 +41,7 @@ public enum AutocompleteType {
     public var pixelCorrections: CGPoint = CGPoint(x: 0, y: 0);
 
     /// The type of autocomplete that should be used
-    public var autocompleteType: AutocompleteType = .Word
+    public var suggestionType: SuggestionType = .Sentence
 
     /// Set a horizontal padding for the the textfield. Automatically set when using a `borderStyle` of `.roundedRect`, `.bezel` or `.line`, because those have added padding.
     public var horizontalPadding: CGFloat = 0
@@ -181,10 +181,10 @@ public enum AutocompleteType {
         label.textAlignment = self.textAlignment
     }
 
-    /// This method converts the suggestions list if autocompleteType is sentence
-    /// and an array with step of an suggestion if autocompleteType is word
+    /// This method converts the suggestions list if suggestionType is sentence
+    /// and an array with step of an suggestion if suggestionType is word
     private func allSuggestions() -> [String] {
-        if (self.autocompleteType == .Sentence) {
+        if (self.suggestionType == .Sentence) {
             return self.suggestions
         }
 

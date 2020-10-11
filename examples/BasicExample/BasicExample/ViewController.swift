@@ -12,12 +12,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // add AutocompleteField to main view
-        let textfield = AutocompleteField(frame: CGRect(x: 20, y: 100, width: self.view.bounds.width - 40, height: 40))
+        let textfield = AutocompleteField(frame: CGRect(x: 20, y: 100, width: self.view.bounds.width - 40, height: 50))
 
-        textfield.font = UIFont(name: "Courier", size: 20)
-        textfield.defaultTextAttributes.updateValue(5, forKey: .kern)
-
-        textfield.placeholder = "Start typing George..."
+        textfield.font = UIFont(name: "American Typewriter", size: 20)
+        textfield.placeholder = "Name"
+        textfield.borderStyle = .roundedRect
+        textfield.autocorrectionType = .no
 
         // add suggestions to textfield
         textfield.suggestions = [
