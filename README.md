@@ -6,8 +6,8 @@
 Subclass of `UITextField` that shows inline suggestions while typing.
 
 - Plug and play replacement for `UITextField`.
-- Delimiter support. Perfect when autocompleting email addresses.
-- Two suggestion modes (word and sentence, see API below).
+- [Delimiter support](#delimiter). Perfect when autocompleting email addresses.
+- Two suggestion modes (word and sentence, see [API](#api) below).
 - Works with custom fonts, borders etc.
 - Super lightweight and zero dependencies.
 
@@ -45,18 +45,19 @@ See [Apple docs](https://developer.apple.com/documentation/xcode/adding_package_
 
 # Usage
 
-You use this textfield in the same way as the regular `UITextField`, through Storyboards or programmatically:
+You use this textfield in the same way as the regular `UITextField`, through Storyboards or programmatically.
+
+## Basic
 
 ```swift
 import AutocompleteField
 
 ...
 
-// basic textfield autocompleting names
-let nameField = AutocompleteField(frame: CGRect(x: 20, y: 20, width: 200, height: 40))
-nameField.placeholder = "Name"
+let textfield = AutocompleteField(frame: CGRect(x: 20, y: 20, width: 200, height: 40))
+textfield.placeholder = "Name"
 
-nameField.suggestions = [
+textfield.suggestions = [
   "George Washington",
   "Thomas Jefferson",
   "John Adams",
@@ -65,27 +66,34 @@ nameField.suggestions = [
   "George W. Bush",
 ]
 
-self.view.addSubview(nameField)
+self.view.addSubview(textfield)
+```
 
+## Delimiter
+
+The delimiter can be used to only suggest an autocompletion after a specific character is found in the string. In this example we look for the `@` character, and then provide suggestions for email providers.
+
+```swift
+import AutocompleteField
+
+...
 
 // email textfield autocompleting email providers
-let emailField = AutocompleteField(frame: CGRect(x: 20, y: 70, width: 200, height: 40))
-emailField.placeholder = "Email"
-emailField.keyboardType = .emailAddress
+let textfield = AutocompleteField(frame: CGRect(x: 20, y: 20, width: 200, height: 40))
+textfield.placeholder = "Email"
+textfield.keyboardType = .emailAddress
 
-emailField.suggestions = [
+textfield.suggestions = [
   "gmail.com",
   "icloud.com",
   "outlook.com",
 ]
 
-// add a delimiter
-emailField.delimiter = "@"
+// add the delimiter
+textfield.delimiter = "@"
 
-self.view.addSubview(emailField)
+self.view.addSubview(textfield)
 ```
-
-> [See full example here](/examples/BasicExample/BasicExample/ViewController.swift)
 
 # API
 
@@ -101,7 +109,7 @@ self.view.addSubview(emailField)
 
 # Demo
 
-Check out the [example project](/examples/BasicExample).
+Check out the [example project](/Example).
 
 # License
 
