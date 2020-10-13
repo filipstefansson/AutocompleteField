@@ -4,10 +4,11 @@ Pod::Spec.new do |s|
   s.summary = "Subclass of UITextField that shows inline suggestions while typing."
   s.homepage = "https://github.com/filipstefansson/AutocompleteField"
   s.screenshots = "https://raw.githubusercontent.com/filipstefansson/AutocompleteField/master/.github/example.gif?raw=1"
-  s.license = { :type => "MIT", :file => "LICENSE" }
+  s.license = { :type => "MIT", :file => "LICENSE.txt" }
   s.author = { "Filip Stefansson" => "filip.stefansson@gmail.com" }
   s.platform = :ios
   s.ios.deployment_target = "10.0"
   s.source = { :git => "https://github.com/filipstefansson/AutocompleteField.git", :tag => "2.0" }
   s.source_files = "Sources/**/*.swift"
+  s.swift_versions = ["4.2", "5.0"]
 end
