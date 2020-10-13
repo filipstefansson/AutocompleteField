@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  BasicExample
+//  Example
 //
-//  Created by Filip Stefansson on 2020-10-09.
+//  Created by Filip Stefansson on 2020-10-13.
 //
 
 import UIKit
